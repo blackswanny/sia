@@ -83,22 +83,30 @@
         window.addEventListener("deviceorientation", function (event) {
             deviceOrientation = DEVICE_ORIENTATION.FLAT;
             var threshold = 30;
-            var alpha = Math.abs(event.alpha);
-            var gamma = Math.abs(event.gamma);
-            var beta = Math.abs(event.beta);
-            if (alpha < threshold && beta < threshold && gamma < threshold) {
+            var alpha = event.alpha;
+            var aalpha = Math.abs(alpha);
+            var gamma = event.gamma;
+            var agamma = Math.abs(gamma);
+            var beta = event.beta;
+            var abeta = Math.abs(beta);
+            if (aalpha < threshold && abeta < threshold && agamma < threshold) {
                 return;
             }
-            if (beta > gamma) {
-                if (beta > alpha) {
-                    deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
+            if (abeta === Math.max(aalpha, abeta, agamma)) {
+                deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
+                if (beta > 0) {
                 } else {
-                    deviceOrientation = DEVICE_ORIENTATION.FLAT;
                 }
-            } else if (gamma > alpha) {
+            } else if (agamma === Math.max(aalpha, abeta, agamma)) {
                 deviceOrientation = DEVICE_ORIENTATION.SIDE;
+                if (gamma > 0) {
+                } else {
+                }
             } else {
                 deviceOrientation = DEVICE_ORIENTATION.FLAT;
+                if (alpha > 0) {
+                } else {
+                }
             }
         }, true);
 
@@ -106,7 +114,7 @@
             if (motionInProgress) {
                 return;
             }
-            var threshold = 2;
+            var threshold = 2.5;
             var acceleration = event.acceleration;
             var command = SIA_COMMANDS.NOT_RECOGNIZED;
             var x, y, z, ax, ay, az;
@@ -130,30 +138,30 @@
                         }
                     } else if (ax === Math.max(ax, ay, az)) {
                         if (x > 0) {
-                            command = SIA_COMMANDS.RIGHT;
+                            command = SIA_COMMANDS.BACK;
                         } else {
-                            command = SIA_COMMANDS.LEFT;
+                            command = SIA_COMMANDS.FORWARD;
                         }
                     } else {
                         if (y > 0) {
-                            command = SIA_COMMANDS.FORWARD;
+                            command = SIA_COMMANDS.RIGHT;
                         } else {
-                            command = SIA_COMMANDS.BACK;
+                            command = SIA_COMMANDS.LEFT;
                         }
                     }
                     break;
                 case DEVICE_ORIENTATION.VERTICAL:
                     if (ay === Math.max(ax, ay, az)) {
                         if (y > 0) {
-                            command = SIA_COMMANDS.UP;
-                        } else {
-                            command = SIA_COMMANDS.DOWN;
-                        }
-                    } else if (ax === Math.max(ax, ay, az)) {
-                        if (x > 0) {
                             command = SIA_COMMANDS.RIGHT;
                         } else {
                             command = SIA_COMMANDS.LEFT;
+                        }
+                    } else if (ax === Math.max(ax, ay, az)) {
+                        if (x > 0) {
+                            command = SIA_COMMANDS.DOWN;
+                        } else {
+                            command = SIA_COMMANDS.UP;
                         }
                     } else {
                         if (z > 0) {
