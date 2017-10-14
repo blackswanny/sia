@@ -46,26 +46,20 @@
 
         };
         recognition.onnomatch = function(event) {
-            console.log('RECOGNIZED NOMATCH');
         };
         recognition.onspeechend = function(event) {
-            console.log('RECOGNIZED SPEECH END');
         };
         recognition.onsoundend = function(event) {
-            console.log('RECOGNIZED SOUND END');
         };
         recognition.onaudioend = function(event) {
-            console.log('RECOGNIZED AUIDO END');
         };
         recognition.onerror = function(event) {
             if (interval) {
                 clearInterval(interval);
             }
             initializeVoiceRecognition();
-            console.log('RECOGNIZED ERROR');
         };
         recognition.onend = function() {
-            console.log('RECOGNIZED END');
         };
         recognition.start();
         return recognition;
@@ -80,7 +74,10 @@
     }
 
     function startDeviceMotion() {
-
+        window.addEventListener('devicemotion', function(event) {
+            console.log(event.acceleration);
+            console.log(event.rotationRate);
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
