@@ -59,6 +59,7 @@
 				camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 2000 );
 				camera.position.set( 1000, 1000, 1000);
 				camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
+				camera.zoom = 1;
 
 				controls = new THREE.DeviceOrientationControls( camera );
 
@@ -121,6 +122,19 @@
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
+				window.addEventListener( 'FORWARD', onForward, false);
+				window.addEventListener( 'BACK', onBack, false);
+
+
+  			function onForward() {
+  			  camera.zoom += 0.2;
+  			  console.log('zoom: ', camera.zoom);
+  			}
+
+  			function onBack() {
+  			  camera.zoom -= 0.2;
+  			  console.log('zoom: ', camera.zoom);
+  			}
 
 			}
 
@@ -144,6 +158,8 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 			}
+
+
 
 		</script>
 	</body>
