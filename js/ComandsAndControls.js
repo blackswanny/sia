@@ -9,9 +9,9 @@
         ARMREST: 'ARMREST',
         CUSHION: 'CUSHION',
         SUSPENSION: 'SUSPENSION',
-        SAFETY_BELT: 'SAFETY_BELT',
-        BENCH_SEAT: 'BENCH_SEAT',
-        BACK_REST: 'BACK_REST'
+        SAFETY_BELT: 'SAFETY BELT',
+        BENCH_SEAT: 'BENCH SEAT',
+        BACK_REST: 'BACK REST'
     };
     document.addEventListener("DOMContentLoaded", function(event) {
         var recognition = new webkitSpeechRecognition();
@@ -31,18 +31,23 @@
                     interim_transcript += event.results[i][0].transcript;
                 }
             }
+            console.log('RECOGNIZED:' + final_transcript + ' ' + interim_transcript);
             Object.keys(window.SIA_COMMANDS).forEach(function (command) {
                 if (interim_transcript.toUpperCase().indexOf(command) >=0
                     || final_transcript.toUpperCase().indexOf(command) >=0) {
+                    console.log('COMMAND:' + command);
                     window.dispatchEvent(new CustomEvent(command));
                 }
             });
 
         };
         recognition.onerror = function(event) {
+            console.log('RECOGNIZED ERROR:');
+            console.log(event);
 
         };
         recognition.onend = function() {
+            console.log('RECOGNIZED END:');
 
         };
         recognition.start();
