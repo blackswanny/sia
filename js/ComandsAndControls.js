@@ -79,6 +79,7 @@
             VERTICAL: 'VERTICAL',
             SIDE: 'SIDE'
         };
+        var motionInProgress = false;
         window.addEventListener("deviceorientation", function (event) {
             deviceOrientation = DEVICE_ORIENTATION.FLAT;
             var threshold = 30;
@@ -102,7 +103,10 @@
         }, true);
 
         window.addEventListener('devicemotion', function(event) {
-            var threshold = 1;
+            if (motionInProgress) {
+                return;
+            }
+            var threshold = 2;
             var acceleration = event.acceleration;
             var command = SIA_COMMANDS.NOT_RECOGNIZED;
             var x, y, z, ax, ay, az;
@@ -160,8 +164,14 @@
                     }
                     break;
             }
-            console.log('RECOGNIZED MOTION:', x, y, z);
-            console.log('RECOGNIZED MOTION:' + command);
+            if (command !== SIA_COMMANDS.NOT_RECOGNIZED) {
+                motionInProgress = true;
+                setTimeout(function () {
+                    motionInProgress = false;
+                }, 1000);
+            }
+            console.log('RECOGNIZED MOTION:', x, y, z, ' ORIENTATION:', deviceOrientation,
+                ' COMMAND: ',command);
             window.dispatchEvent(new CustomEvent(command));
         });
     }
