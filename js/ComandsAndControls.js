@@ -32,7 +32,8 @@
                 }
             }
             Object.keys(window.SIA_COMMANDS).forEach(function (command) {
-                if (final_transcript.toUpperCase().indexOf(command) >=0) {
+                if (interim_transcript.toUpperCase().indexOf(command) >=0
+                    || final_transcript.toUpperCase().indexOf(command) >=0) {
                     window.dispatchEvent(new CustomEvent(command));
                 }
             });
