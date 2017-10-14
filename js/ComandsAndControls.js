@@ -102,8 +102,9 @@
         }, true);
 
         window.addEventListener('devicemotion', function(event) {
-            var threshold = 2;
+            var threshold = 1;
             var acceleration = event.acceleration;
+            var command = SIA_COMMANDS.NOT_RECOGNIZED;
             var x, y, z, ax, ay, az;
             x = acceleration.x;
             y = acceleration.y;
@@ -112,53 +113,56 @@
             ay = Math.abs(y);
             az = Math.abs(z);
             if (ax < threshold && ay < threshold && az < threshold) {
-                console.log('NOT RECOGNIZED MOTION:', ax, ay, az);
+                // console.log('NOT RECOGNIZED MOTION:', ax, ay, az);
                 return;
             }
             switch (deviceOrientation) {
                 case DEVICE_ORIENTATION.FLAT:
                     if (az = Math.max(ax, ay, az)) {
                         if (z > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.UP));
+                            command = SIA_COMMANDS.UP;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.DOWN));
+                            command = SIA_COMMANDS.DOWN;
                         }
                     } else if (ax = Math.max(ax, ay, az)) {
                         if (x > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.RIGHT));
+                            command = SIA_COMMANDS.RIGHT;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.LEFT));
+                            command = SIA_COMMANDS.LEFT;
                         }
                     } else {
                         if (y > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.FORWARD));
+                            command = SIA_COMMANDS.FORWARD;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK));
+                            command = SIA_COMMANDS.BACK;
                         }
                     }
                     break;
                 case DEVICE_ORIENTATION.VERTICAL:
                     if (ay = Math.max(ax, ay, az)) {
                         if (y > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.UP));
+                            command = SIA_COMMANDS.UP;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.DOWN));
+                            command = SIA_COMMANDS.DOWN;
                         }
                     } else if (ax = Math.max(ax, ay, az)) {
                         if (x > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.RIGHT));
+                            command = SIA_COMMANDS.RIGHT;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.LEFT));
+                            command = SIA_COMMANDS.LEFT;
                         }
                     } else {
                         if (z > 0) {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.FORWARD));
+                            command = SIA_COMMANDS.FORWARD;
                         } else {
-                            window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK));
+                            command = SIA_COMMANDS.BACK;
                         }
                     }
                     break;
             }
+            console.log('RECOGNIZED MOTION:', x, y, z);
+            console.log('RECOGNIZED MOTION:' + command);
+            window.dispatchEvent(new CustomEvent(command));
         });
     }
 
