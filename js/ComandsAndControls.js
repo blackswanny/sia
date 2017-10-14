@@ -81,7 +81,7 @@
         };
         var motionInProgress = false;
         window.addEventListener("deviceorientation", function (event) {
-            deviceOrientation = DEVICE_ORIENTATION.FLAT;
+            deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
             var threshold = 30;
             var alpha = event.alpha;
             var aalpha = Math.abs(alpha);
@@ -108,6 +108,7 @@
                 } else {
                 }
             }
+            console.log('ORIENTATION:', deviceOrientation, ' ', alpha, beta, gamma);
         }, true);
 
         window.addEventListener('devicemotion', function(event) {
