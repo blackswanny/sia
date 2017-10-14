@@ -80,34 +80,79 @@
             SIDE: 'SIDE'
         };
         var motionInProgress = false;
+        var prevAlpha = 0;
+        var prevBeta = 0;
+        var prevGamma = 0;
         window.addEventListener("deviceorientation", function (event) {
+            var threshold = 45;
+            var close = function (a, b, isGamma) {
+                return Math.abs(a - b) < (isGamma ? threshold/4 : threshold);
+            };
+            var DIRECTIONS = {
+                NORTH: 'NORTH',
+                SOUTH: 'SOUTH',
+                WEST: 'WEST',
+                EAST: 'EAST'
+            };
+            var direction;
             deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
-            var threshold = 30;
             var alpha = event.alpha;
             var aalpha = Math.abs(alpha);
             var gamma = event.gamma;
             var agamma = Math.abs(gamma);
             var beta = event.beta;
             var abeta = Math.abs(beta);
-            if (aalpha < threshold && abeta < threshold && agamma < threshold) {
+            if (aalpha < threshold && abeta < threshold && agamma < threshold/4) {
                 return;
             }
-            if (abeta === Math.max(aalpha, abeta, agamma)) {
-                deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
-                if (beta > 0) {
-                } else {
-                }
-            } else if (agamma === Math.max(aalpha, abeta, agamma)) {
-                deviceOrientation = DEVICE_ORIENTATION.SIDE;
-                if (gamma > 0) {
-                } else {
-                }
-            } else {
+            if (close(beta, 0) || close(gamma, 0)) {
                 deviceOrientation = DEVICE_ORIENTATION.FLAT;
-                if (alpha > 0) {
-                } else {
-                }
             }
+            console.log('ORIENTATION:', deviceOrientation, ' ', alpha, beta, gamma);
+            return;
+
+
+
+            // direction = DIRECTIONS.NORTH;
+            // if (close(alpha, 0)) {
+            //     direction = DIRECTIONS.NORTH;
+            //     if (close(beta, 90) || close(beta, -90)) {
+            //         deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
+            //         return;
+            //     } else if (close(beta, 180) || close(beta, -180)) {
+            //         deviceOrientation = DEVICE_ORIENTATION.FLAT;
+            //         return;
+            //     }
+            // } else if (close(alpha, 90)) {
+            //     direction = DIRECTIONS.WEST;
+            // } else if (close(alpha, 180)) {
+            //     direction = DIRECTIONS.SOUTH;
+            // } else if (close(alpha, 270)) {
+            //     direction = DIRECTIONS.EAST;
+            // }
+            //
+            // if (abeta < threshold && agamma < threshold/4) {
+            //     deviceOrientation = DEVICE_ORIENTATION.FLAT;
+            //     return;
+            // } else {
+            //
+            // }
+            //
+            //
+            //
+            // if (aalpha === Math.max(aalpha, abeta, agamma)) {
+            //
+            // } else if (agamma === Math.max(aalpha, abeta, agamma)) {
+            //     deviceOrientation = DEVICE_ORIENTATION.SIDE;
+            //     if (aalpha > threshold) {
+            //         deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
+            //     }
+            // } else {
+            //     deviceOrientation = DEVICE_ORIENTATION.FLAT;
+            //     if (agamma > threshold) {
+            //         deviceOrientation = DEVICE_ORIENTATION.VERTICAL;
+            //     }
+            // }
             console.log('ORIENTATION:', deviceOrientation, ' ', alpha, beta, gamma);
         }, true);
 
@@ -185,8 +230,22 @@
         });
     }
 
+
+
     document.addEventListener("DOMContentLoaded", function(event) {
         initializeVoiceRecognition();
         startDeviceMotion();
     });
+
+    function addPopup() {
+
+    }
+
+    window.addEventListener(SIA_COMMANDS.ARMREST, function(event) {});
+    window.addEventListener(SIA_COMMANDS.CUSHION, function(event) {});
+    window.addEventListener(SIA_COMMANDS.SUSPENSION, function(event) {});
+    window.addEventListener(SIA_COMMANDS.SAFETY_BELT, function(event) {});
+    window.addEventListener(SIA_COMMANDS.BENCH_SEAT, function(event) {});
+    window.addEventListener(SIA_COMMANDS.BACK_REST, function(event) {});
+
 })(document, window);
