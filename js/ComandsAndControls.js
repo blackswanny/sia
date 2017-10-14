@@ -122,13 +122,13 @@
             }
             switch (deviceOrientation) {
                 case DEVICE_ORIENTATION.FLAT:
-                    if (az = Math.max(ax, ay, az)) {
+                    if (az === Math.max(ax, ay, az)) {
                         if (z > 0) {
                             command = SIA_COMMANDS.UP;
                         } else {
                             command = SIA_COMMANDS.DOWN;
                         }
-                    } else if (ax = Math.max(ax, ay, az)) {
+                    } else if (ax === Math.max(ax, ay, az)) {
                         if (x > 0) {
                             command = SIA_COMMANDS.RIGHT;
                         } else {
@@ -143,13 +143,13 @@
                     }
                     break;
                 case DEVICE_ORIENTATION.VERTICAL:
-                    if (ay = Math.max(ax, ay, az)) {
+                    if (ay === Math.max(ax, ay, az)) {
                         if (y > 0) {
                             command = SIA_COMMANDS.UP;
                         } else {
                             command = SIA_COMMANDS.DOWN;
                         }
-                    } else if (ax = Math.max(ax, ay, az)) {
+                    } else if (ax === Math.max(ax, ay, az)) {
                         if (x > 0) {
                             command = SIA_COMMANDS.RIGHT;
                         } else {
