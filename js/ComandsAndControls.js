@@ -9,12 +9,16 @@
         ARMREST: 'ARMREST',
         CUSHION: 'CUSHION',
         SUSPENSION: 'SUSPENSION',
-        SAFETY_BELT: 'SAFETY BELT',
-        BENCH_SEAT: 'BENCH SEAT',
-        BACK_REST: 'BACK REST'
+        SAFETY_BELT: 'BELT',
+        BENCH_SEAT: 'BENCH',
+        BACK_REST: 'REST'
     };
-    document.addEventListener("DOMContentLoaded", function(event) {
+    var recognitionApi;
+
+    function startVoiceRecognition(interval) {
         var recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.maxAlternatives = 5;
         recognition.continuous = true;
         recognition.interimResults = true;
 
@@ -41,16 +45,46 @@
             });
 
         };
+        recognition.onnomatch = function(event) {
+            console.log('RECOGNIZED NOMATCH');
+        };
+        recognition.onspeechend = function(event) {
+            console.log('RECOGNIZED SPEECH END');
+        };
+        recognition.onsoundend = function(event) {
+            console.log('RECOGNIZED SOUND END');
+        };
+        recognition.onaudioend = function(event) {
+            console.log('RECOGNIZED AUIDO END');
+        };
         recognition.onerror = function(event) {
-            console.log('RECOGNIZED ERROR:');
-            console.log(event);
-
+            if (interval) {
+                clearInterval(interval);
+            }
+            initializeVoiceRecognition();
+            console.log('RECOGNIZED ERROR');
         };
         recognition.onend = function() {
-            console.log('RECOGNIZED END:');
-
+            console.log('RECOGNIZED END');
         };
         recognition.start();
+        return recognition;
+    }
 
+    function initializeVoiceRecognition() {
+        recognitionApi = startVoiceRecognition();
+        var interval = setInterval(function () {
+            recognitionApi.abort();
+            recognitionApi = startVoiceRecognition(interval);
+        }, 2000);
+    }
+
+    function startDeviceMotion() {
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        initializeVoiceRecognition();
+        startDeviceMotion();
     });
 })(document, window);
