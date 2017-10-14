@@ -102,10 +102,19 @@
             var agamma = Math.abs(gamma);
             var beta = event.beta;
             var abeta = Math.abs(beta);
-            if (aalpha < threshold && abeta < threshold && agamma < threshold/4) {
+            if (close(alpha, prevAlpha) && close(beta, prevBeta) && close(gamma, prevGamma, true)) {
                 return;
             }
-            if (close(beta, 0) || close(gamma, 0)) {
+            if (!close(alpha, prevAlpha)) {
+                prevAlpha = alpha;
+            }
+            if (!close(beta, prevBeta)) {
+                prevBeta = beta;
+            }
+            if (!close(gamma, prevGamma)) {
+                prevGamma = gamma;
+            }
+            if (close(beta, 0) && close(gamma, 0, true)) {
                 deviceOrientation = DEVICE_ORIENTATION.FLAT;
             }
             console.log('ORIENTATION:', deviceOrientation, ' ', alpha, beta, gamma);
@@ -236,16 +245,5 @@
         initializeVoiceRecognition();
         startDeviceMotion();
     });
-
-    function addPopup() {
-
-    }
-
-    window.addEventListener(SIA_COMMANDS.ARMREST, function(event) {});
-    window.addEventListener(SIA_COMMANDS.CUSHION, function(event) {});
-    window.addEventListener(SIA_COMMANDS.SUSPENSION, function(event) {});
-    window.addEventListener(SIA_COMMANDS.SAFETY_BELT, function(event) {});
-    window.addEventListener(SIA_COMMANDS.BENCH_SEAT, function(event) {});
-    window.addEventListener(SIA_COMMANDS.BACK_REST, function(event) {});
 
 })(document, window);
