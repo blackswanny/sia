@@ -67,10 +67,6 @@
 
     function initializeVoiceRecognition() {
         recognitionApi = startVoiceRecognition();
-        var interval = setInterval(function () {
-            recognitionApi.abort();
-            recognitionApi = startVoiceRecognition(interval);
-        }, 2000);
     }
 
     function startDeviceMotion() {
