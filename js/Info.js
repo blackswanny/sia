@@ -2,15 +2,13 @@
 
 
     function showPopupModal(type) {
-alert(type);
         var left = document.getElementById('left');
         var right = document.getElementById('right');
-console.log("left", left);        
         left.innerHTML = type;
         right.innerHTML = type;
         
-        left.style.display = block;
-        right.style.display = block;
+        left.style.display = 'block';
+        right.style.display = 'block';
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {

@@ -13,6 +13,30 @@
 				overflow: hidden;
 			}
 
+			.modalDialog {
+			    position: fixed;
+			    font-family: Arial, Helvetica, sans-serif;
+			    width: 20%;
+			    left: 0;
+			    z-index: 99999;
+			    opacity:1;
+			    -webkit-transition: opacity 400ms ease-in;
+			    -moz-transition: opacity 400ms ease-in;
+			    transition: opacity 400ms ease-in;
+			    pointer-events: none;
+			}
+
+			.modalDialog > div {
+			    position: relative;
+			    margin: 10% auto;
+			    padding: 5px 20px 13px 20px;
+			    border-radius: 10px;
+			    background: #fff;
+			    background: -moz-linear-gradient(#fff, #999);
+			    background: -webkit-linear-gradient(#fff, #999);
+			    background: -o-linear-gradient(#fff, #999);
+			}
+
 			#info {
 				position: absolute;
 				top: 0px; width: 100%;
@@ -27,36 +51,24 @@
 			a {
 				color: #ff8800;
 			}
-
+*
 			#left {
 			  padding: 10px;
 			  font-family: Arial;
-			  color: yellow;
-      	position: absolute;
-				top: 30px;
-				width: 50%;
-				text-align: left;
-				z-index: 100;
-				display:none;
+			  left: 0;
 			}
 
 			#right {
 			  padding: 10px;
 			  font-family: Arial;
-			  color: yellow;
-      	position: absolute;
-				top: 30px;
-				left: 50%;
-				width: 50%;
-				text-align: left;
-				z-index: 100;
-				display:none;
+			  left: 50%;
 			}
+
 		</style>
 	</head>
 	<body>
-    <div id="left">Description</div>
-    <div id="right">Description</div>
+    <div id="left" class="modalDialog"><div>Description</div></div>
+    <div id="right" class="modalDialog"><div>Description</div></div>
 		<div id="container"></div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
