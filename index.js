@@ -1,7 +1,7 @@
-const HTTPS_PORT = process.env.PORT || 8080;
 
 const fs = require('fs');
 const https = require('https');
+var path = require('path');
 const WebSocket = require('ws');
 const WebSocketServer = WebSocket.Server;
 
@@ -11,30 +11,23 @@ const serverConfig = {
    // cert: fs.readFileSync('server.crt'),
 };
 
-// ----------------------------------------------------------------------------------------
+var express = require('express');
+var app = express();
 
-// Create a server for the client html page
-var handleRequest = function(request, response) {
-    // Render the single client html file for any request the HTTP server receives
-    console.log('request received: ' + request.url);
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+app.set('port', port);
+app.use(express.static(__dirname));
+app.get('/', function(req, res) {
+    // ejs render automatically looks in the views folder
+    res.sendFile(__dirname + '/index.html');
+});
 
-    if(request.url === '/') {
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.end(fs.readFileSync('index.html'));
-    } else if(request.url === '/js/chatclient.js') {
-        response.writeHead(200, {'Content-Type': 'application/javascript'});
-        response.end(fs.readFileSync('js/chatclient.js'));
-    } else if(request.url === '/js/ComandsAndControls.js') {
-        response.writeHead(200, {'Content-Type': 'application/javascript'});
-        response.end(fs.readFileSync('js/ComandsAndControls.js'));
-    } else if(request.url === '/js/Info.js') {
-        response.writeHead(200, {'Content-Type': 'application/javascript'});
-        response.end(fs.readFileSync('js/Info.js'));
-    }
-};
+app.listen(app.get('port'), function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
 
-var httpsServer = https.createServer(serverConfig, handleRequest);
-httpsServer.listen(HTTPS_PORT);
 
 // ----------------------------------------------------------------------------------------
 //
