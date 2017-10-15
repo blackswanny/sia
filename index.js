@@ -29,25 +29,25 @@ app.listen(app.get('port'), function() {
 });
 
 
-// ----------------------------------------------------------------------------------------
-//
-// // Create a server for handling websocket calls
-// var wss = new WebSocketServer({server: httpsServer});
-//
-// wss.on('connection', function(ws) {
-//     ws.on('message', function(message) {
-//         // Broadcast any received message to all clients
-//         console.log('received: %s', message);
-//         wss.broadcast(message);
-//     });
-// });
-//
-// wss.broadcast = function(data) {
-//     this.clients.forEach(function(client) {
-//         if(client.readyState === WebSocket.OPEN) {
-//             client.send(data);
-//         }
-//     });
-// };
-//
-// console.log('Server running. Visit https://localhost:' + HTTPS_PORT + ' in Firefox/Chrome (note the HTTPS; there is no HTTP -> HTTPS redirect!)');
+var httpsServer = https.createServer(app);
+
+// Create a server for handling websocket calls
+var wss = new WebSocketServer({server: httpsServer});
+
+wss.on('connection', function(ws) {
+    ws.on('message', function(message) {
+        // Broadcast any received message to all clients
+        console.log('received: %s', message);
+        wss.broadcast(message);
+    });
+});
+
+wss.broadcast = function(data) {
+    this.clients.forEach(function(client) {
+        if(client.readyState === WebSocket.OPEN) {
+            client.send(data);
+        }
+    });
+};
+
+console.log('Server running. Visit https://localhost:' + port + ' in Firefox/Chrome (note the HTTPS; there is no HTTP -> HTTPS redirect!)');
