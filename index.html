@@ -173,6 +173,13 @@
 				max-height:22em;
 				padding-bottom:1em;
 			}
+			.support {
+				overflow: hidden;
+				max-height: 0;
+			}
+			.support-active {
+				max-height:22em;
+			}
 		</style>
 	</head>
 	<body>
@@ -341,7 +348,7 @@
 
 
 		</script>
-	<div style="
+	<div id="support" class="support" style="
 	background: white;
 	position: fixed;
 	top: 0;
@@ -365,7 +372,7 @@
 			<ul class="menu">
 				<li><a>change seats model</a></li>
 				<li><a>change colors\style</a></li>
-				<li><a>call technician</a></li>
+				<li onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.CALL));"><a>call technician</a></li>
 				<li><a>show extra features</a></li>
 				<li><a>show dimensions</a></li>
 				<li><a>send specs by email</a></li>

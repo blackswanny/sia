@@ -14,6 +14,7 @@
         BENCH_SEAT: 'BENCH',
         BACK_REST: 'REST',
         MENU: 'MENU',
+        CALL: 'CALL',
         NOT_RECOGNIZED: 'NOT_RECOGNIZED'
     };
     var recognitionApi;
@@ -24,7 +25,7 @@
         recognition.lang = 'en-US';
         recognition.maxAlternatives = 5;
         recognition.continuous = true;
-        recognition.interimResults = true;
+        recognition.interimResults = false;
 
         recognition.onstart = function() {
 
