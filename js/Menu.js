@@ -4,7 +4,8 @@
 
         var menu = document.querySelector( '.menu' ),
             button = document.querySelector('.nav-toggle'),
-            supportBlock = document.getElementById('support');
+            supportBlock = document.getElementById('support'),
+            chatdemo = document.getElementById('chatdemo');
             dropdown = document.querySelector('.dropdown');
 
         button.onclick = function() {
@@ -21,6 +22,9 @@
         });
         window.addEventListener(SIA_COMMANDS.CALL, function(event) {
             classie.toggle(supportBlock, 'support-active');
+        });
+        window.addEventListener(SIA_COMMANDS.CHAT, function(event) {
+            classie.toggle(chatdemo, 'support-active');
         });
 
 

@@ -185,7 +185,7 @@
 				max-height:22em;
 				padding-bottom:1em;
 			}
-			.support {
+			.support, .chatdemo {
 				overflow: hidden;
 				max-height: 0;
 			}
@@ -409,18 +409,20 @@
 				<li><a>change colors\style</a></li>
 				<li onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.CALL));"><a>call technician</a></li>
 				<li><a>show extra features</a></li>
+				<li onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.CHAT));"><a>chat bot</a></li>
 				<li><a>show dimensions</a></li>
 				<li><a>send specs by email</a></li>
 			</ul>
 		</nav>
 
-		<div id="demo" style="
+		<div id="chatdemo" class="chatdemo" style="
 	background: white;
-	position: fixed;
+	position: fixed !important;
 	top: 0;
 	right: 0;
 	width: 100px;
 ">
+			<div>
 			<div id="chatBotCommandDescription"></div>
 			<input id="humanInput" type="text" placeholder="Say something" />
 
@@ -429,6 +431,7 @@
 			<div id="chatBot">
 				<div id="chatBotThinkingIndicator"></div>
 				<div id="chatBotHistory"></div>
+			</div>
 			</div>
 		</div>
 
