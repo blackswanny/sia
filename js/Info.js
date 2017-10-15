@@ -4,11 +4,17 @@
     function showPopupModal(type) {
         var left = document.getElementById('left');
         var right = document.getElementById('right');
-        left.innerHTML = type;
-        right.innerHTML = type;
+        var left1 = document.getElementById('left1');
+        var right1 = document.getElementById('right1');
+        left1.innerHTML = type;
+        right1.innerHTML = type;
         
         left.style.display = 'block';
         right.style.display = 'block';
+        setTimeout(function(){
+            left.style.display = 'none';
+            right.style.display = 'none';
+        }, 5000);
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
