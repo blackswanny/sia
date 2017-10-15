@@ -141,12 +141,12 @@ var httpsOptions = {
     //key: fs.readFileSync("/etc/pki/tls/private/mdn.key"),
     //cert: fs.readFileSync("/etc/pki/tls/certs/mdn.crt")
 };
-var privateKey = fs.readFileSync('server.key').toString();
-var certificate = fs.readFileSync('server.crt').toString();
+//var privateKey = fs.readFileSync('server.key').toString();
+//var certificate = fs.readFileSync('server.crt').toString();
 
-var credentials = {key: privateKey, cert: certificate};
+//var credentials = {key: privateKey, cert: certificate};
 
-var server = https.createServer(credentials,function (req, res) {
+var server = https.createServer({},function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Hello World\n');
 });
