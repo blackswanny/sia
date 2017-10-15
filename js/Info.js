@@ -1,13 +1,21 @@
 (function (document, window, undefined) {
-
+    window.INFOS = {
+        ARMREST: 'Information about Armrest is displayed here. It is very interesting!',
+        CUSHION: 'Information about Cushion is displayed here. It is very interesting!',
+        SUSPENSION: 'Information about Suspension is displayed here. It is very interesting!',
+        SAFETY_BELT: 'Information about Belt is displayed here. It is very interesting!',
+        BENCH_SEAT: 'Information about Bench is displayed here. It is very interesting!',
+        BACK_REST: 'Information about Back Rest is displayed here. It is very interesting!'
+    };
 
     function showPopupModal(type) {
         var left = document.getElementById('left');
         var right = document.getElementById('right');
         var left1 = document.getElementById('left1');
         var right1 = document.getElementById('right1');
-        left1.innerHTML = type;
-        right1.innerHTML = type;
+        var head = '<h2>'+type+'</h2><p>'+INFOS[type]+'</p>';
+        left1.innerHTML = head;
+        right1.innerHTML = head;
         
         left.style.display = 'block';
         right.style.display = 'block';
