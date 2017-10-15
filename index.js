@@ -149,6 +149,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.set('view engine', 'ejs');
 
+var server = https.createServer(app);
 
 app.get('/', function(request, response) {
     response.sendFile(__dirname + '/index.html');
