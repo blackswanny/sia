@@ -227,6 +227,7 @@
 			function init() {
 
 				container = document.getElementById( 'container' );
+				container.addEventListener('click', fullscreen, false);
 
 				camera = new THREE.PerspectiveCamera( 120, window.innerWidth / window.innerHeight, 0.1, 2000 );
 				camera.position.set( 1000, 1000, 1000);
@@ -331,6 +332,18 @@
   			  camera.position.x += 200;
   			  console.log('position: ', camera.position);
   			}
+
+        function fullscreen() {
+          if (container.requestFullscreen) {
+            container.requestFullscreen();
+          } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+          } else if (container.mozRequestFullScreen) {
+            container.mozRequestFullScreen();
+          } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+          }
+        }
 
 			}
 
