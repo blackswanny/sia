@@ -219,7 +219,7 @@
 		<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 		<script>
 
-			var container, camera, scene, renderer, controls;
+			var container, camera, scene, renderer, controls, bod;
 
 			init();
 			animate();
@@ -227,7 +227,8 @@
 			function init() {
 
 				container = document.getElementById( 'container' );
-				container.addEventListener('click', fullscreen, false);
+				all = document.getElementsByTagName('body')[0];
+				document.addEventListener('click', fullscreen, false);
 
 				camera = new THREE.PerspectiveCamera( 120, window.innerWidth / window.innerHeight, 0.1, 2000 );
 				camera.position.set( 1000, 1000, 1000);
@@ -334,14 +335,15 @@
   			}
 
         function fullscreen() {
-          if (container.requestFullscreen) {
-            container.requestFullscreen();
-          } else if (container.msRequestFullscreen) {
-            container.msRequestFullscreen();
-          } else if (container.mozRequestFullScreen) {
-            container.mozRequestFullScreen();
-          } else if (container.webkitRequestFullscreen) {
-            container.webkitRequestFullscreen();
+        console.log('all');
+          if (all.requestFullscreen) {
+            all.requestFullscreen();
+          } else if (all.msRequestFullscreen) {
+            all.msRequestFullscreen();
+          } else if (all.mozRequestFullScreen) {
+            all.mozRequestFullScreen();
+          } else if (all.webkitRequestFullscreen) {
+            all.webkitRequestFullscreen();
           }
         }
 
