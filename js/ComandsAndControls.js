@@ -15,10 +15,12 @@
         BACK_REST: 'REST',
         MENU: 'MENU',
         CALL: 'CALL',
+        CHAT: 'CHAT',
         NOT_RECOGNIZED: 'NOT_RECOGNIZED'
     };
     var recognitionApi;
     var voiceCommandInProgress = false;
+    var chatIsActive = false;
 
     function startVoiceRecognition(interval) {
         var recognition = new webkitSpeechRecognition();
@@ -41,6 +43,8 @@
                 }
             }
             console.log('RECOGNIZED:' + final_transcript + ' ' + interim_transcript);
+            document.getElementById('humanInput').value = final_transcript;
+
             Object.keys(window.SIA_COMMANDS).forEach(function (command) {
                 if (interim_transcript.toUpperCase().indexOf(command) >=0
                     || final_transcript.toUpperCase().indexOf(command) >=0) {
@@ -248,6 +252,9 @@
         });
     }
 
+    window.addEventListener(SIA_COMMANDS.CHAT, function(event) {
+       chatIsActive = !chatIsActive;
+    });
 
 
     document.addEventListener("DOMContentLoaded", function(event) {
