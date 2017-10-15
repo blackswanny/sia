@@ -259,12 +259,7 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
         initializeVoiceRecognition();
-        setTimeout(function () {
-            recognitionApi.stop();
-            setTimeout(function () {
-                initializeVoiceRecognition();
-            }, 500);
-        }, 3000);
+
         startDeviceMotion();
     });
 
