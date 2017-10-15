@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', function(request, response) {
-    response.sendFile(__dirname + '/webgl2.html');
+    response.sendFile(__dirname + '/index.html');
 });
 
 app.listen(app.get('port'), function() {
