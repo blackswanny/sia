@@ -68,7 +68,7 @@
 			.modalArrows > div {
 				text-align: right;
 			    position: relative;
-			    margin: 10% auto;
+			    margin: auto;
 			    padding: 5px 20px 13px 20px;
 			    border-radius: 10px;
 			    background: #fff;
@@ -203,6 +203,14 @@
 	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.FORWARD));">&#8599;</div>
 	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK));">&#8601;</div>
 	        </div>
+			<div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.ARMREST));">&sime;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.CUSHION));">&cap;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.SUSPENSION));">&esdot;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.SAFETY_BELT));">&nsqsupe;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BENCH_SEAT));">&profsurf;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK_REST));">&lmoust;</div>
+			</div>
 	    </div>
 
 	    <div id="left" class="modalDialog"><div id="left1"></div></div>
