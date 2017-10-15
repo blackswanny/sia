@@ -1,11 +1,11 @@
 (function (document, window, undefined) {
     window.INFOS = {
-        ARMREST: 'Information about Armrest is displayed here. It is very interesting!',
-        CUSHION: 'Information about Cushion is displayed here. It is very interesting!',
-        SUSPENSION: 'Information about Suspension is displayed here. It is very interesting!',
-        SAFETY_BELT: 'Information about Belt is displayed here. It is very interesting!',
-        BENCH_SEAT: 'Information about Bench is displayed here. It is very interesting!',
-        BACK_REST: 'Information about Back Rest is displayed here. It is very interesting!'
+        [SIA_COMMANDS.ARMREST]: 'This is a nice and beautiful armrest. You should like its comfort!',
+        [SIA_COMMANDS.CUSHION]: 'Cushions are here for you relax and sleep',
+        [SIA_COMMANDS.SUSPENSION]: 'This suspension holds any activity on a seat',
+        [SIA_COMMANDS.SAFETY_BELT]: 'We respect your safety, so safey belts are comfortable',
+        [SIA_COMMANDS.BENCH_SEAT]: 'You will definitely like our bench as it is made of soft fabrics',
+        [SIA_COMMANDS.BACK_REST]: 'Such back rest seriosly makes your back resting'
     };
 
     function showPopupModal(type) {

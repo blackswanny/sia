@@ -52,7 +52,7 @@
 			}
 
 			.modalArrows {
-				font-size: 1.2em;
+				font-size: 1em;
 			    position: fixed;
 			    font-family: Arial, Helvetica, sans-serif;
 			    right: 0;
@@ -68,7 +68,7 @@
 			.modalArrows > div {
 				text-align: right;
 			    position: relative;
-			    margin: 10% auto;
+			    margin: auto;
 			    padding: 5px 20px 13px 20px;
 			    border-radius: 10px;
 			    background: #fff;
@@ -115,7 +115,7 @@
 				top: 0;
 				left: 0;
 				text-transform:uppercase;
-				padding:1em 1em 0 1em;
+				padding:.3em ;
 				background:white;
 				display:block;
 				color:#222;
@@ -125,8 +125,8 @@
 				-webkit-appearance: none;
 				background:white;
 				text-transform:uppercase;
-				font-size:0.7em;
-				padding:.5em;
+				font-size:0.3em;
+				padding:.1em;
 				border:none;
 				outline:none;
 				transition: all 0.2s;
@@ -153,16 +153,17 @@
 			.menu {
 				list-style:none;
 				padding:0;
-				margin:1em 0 0 0;
+				margin:.3em 0 0 0;
 				transition: all 0.8s cubic-bezier(.15,.7,0,1);
 			}
 
 			.menu a {
 				display:block;
+				font-size: 0.3em;
 				color:white;
 				background:#222;
 				text-decoration:none;
-				padding:.5em .5em;
+				padding:.2em;
 				outline:none;
 				margin-bottom:.2em;
 				transition: all 0.2s;
@@ -202,6 +203,14 @@
 	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.FORWARD));">&#8599;</div>
 	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK));">&#8601;</div>
 	        </div>
+			<div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.ARMREST));">&sime;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.CUSHION));">&cap;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.SUSPENSION));">&esdot;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.SAFETY_BELT));">&nsqsupe;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BENCH_SEAT));">&profsurf;</div>
+				<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK_REST));">&lmoust;</div>
+			</div>
 	    </div>
 
 	    <div id="left" class="modalDialog"><div id="left1"></div></div>
@@ -409,7 +418,7 @@
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 200px;
+	width: 100px;
 ">
 			<div id="chatBotCommandDescription"></div>
 			<input id="humanInput" type="text" placeholder="Say something" />
