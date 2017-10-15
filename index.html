@@ -3,10 +3,11 @@
 	<head>
 		<title>Cabin Seat</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 		<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 		<script src="js/ComandsAndControls.js"></script>
 		<script src="js/Info.js"></script>
+		<script src="js/Menu.js"></script>
 		<script src="js/chatclient.js"></script>
 		<style>
 			body {
@@ -41,6 +42,7 @@
 			}
 
 			.modalArrows {
+				font-size: 2em;
 			    position: fixed;
 			    font-family: Arial, Helvetica, sans-serif;
 			    right: 0;
@@ -98,6 +100,79 @@
 			  left: 50%;
 			}
 
+			.dropdown {
+				position: fixed;
+				top: 0;
+				left: 0;
+				text-transform:uppercase;
+				padding:1em 1em 0 1em;
+				background:white;
+				display:block;
+				color:#222;
+			}
+
+			.nav-toggle {
+				-webkit-appearance: none;
+				background:white;
+				text-transform:uppercase;
+				font-size:1em;
+				padding:.5em;
+				border:none;
+				outline:none;
+				transition: all 0.2s;
+				cursor:pointer;
+			}
+
+			.nav-toggle:hover {
+				background:#222;
+				color:#fff;
+			}
+
+			.nav-toggle:focus, .menu a:focus {
+				outline:1px solid red;
+			}
+
+			.nav-toggle svg {
+				width:16px;
+				height:16px;
+				fill:red;
+				vertical-align:top;
+				margin-right:.25em;
+			}
+
+			.menu {
+				list-style:none;
+				padding:0;
+				margin:1em 0 0 0;
+				transition: all 0.8s cubic-bezier(.15,.7,0,1);
+			}
+
+			.menu a {
+				display:block;
+				color:white;
+				background:#222;
+				text-decoration:none;
+				padding:.5em .5em;
+				outline:none;
+				margin-bottom:.2em;
+				transition: all 0.2s;
+			}
+
+
+			.menu a:hover {
+				background:#fff;
+				color:#222;
+			}
+
+			.js .menu {
+				overflow: hidden;
+				max-height: 0;
+			}
+
+			.js .menu-active {
+				max-height:22em;
+				padding-bottom:1em;
+			}
 		</style>
 	</head>
 	<body>
@@ -270,11 +345,11 @@
 	background: white;
 	position: fixed;
 	top: 0;
-	left: 0;
+	right: 0;
 	width: 200px;
 ">
-		<video id="localVideo" autoplay muted style="width:40%;"></video>
-		<video id="remoteVideo" autoplay style="width:40%;"></video>
+		<video id="localVideo" autoplay muted style="width:100%;"></video>
+		<video id="remoteVideo" autoplay style="width:100%;"></video>
 
 		<br />
 
@@ -283,5 +358,20 @@
 		<script type="text/javascript">
             pageReady();
 		</script>
+
+
+		<nav class="dropdown">
+			<button class="nav-toggle"><svg viewBox="0 0 16 16"><path d="M8.5 1c-4.142 0-7.5 3.358-7.5 7.5 0 4.143 3.358 7.5 7.5 7.5 4.143 0 7.5-3.357 7.5-7.5 0-4.142-3.357-7.5-7.5-7.5zm4 11h-8c-.276 0-.5-.225-.5-.5s.224-.5.5-.5h8c.275 0 .5.225.5.5s-.225.5-.5.5zm0-3h-8c-.276 0-.5-.225-.5-.5 0-.276.224-.5.5-.5h8c.275 0 .5.224.5.5 0 .275-.225.5-.5.5zm0-3h-8c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h8c.275 0 .5.224.5.5s-.225.5-.5.5z"/></svg> Menu</button>
+			<ul class="menu">
+				<li><a>change seats model</a></li>
+				<li><a>change colors\style</a></li>
+				<li><a>call technician</a></li>
+				<li><a>show extra features</a></li>
+				<li><a>show dimensions</a></li>
+				<li><a>send specs by email</a></li>
+			</ul>
+		</nav>
+
+
 	</body>
 </html>

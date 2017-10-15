@@ -13,9 +13,11 @@
         SAFETY_BELT: 'BELT',
         BENCH_SEAT: 'BENCH',
         BACK_REST: 'REST',
+        MENU: 'MENU',
         NOT_RECOGNIZED: 'NOT_RECOGNIZED'
     };
     var recognitionApi;
+    var voiceCommandInProgress = false;
 
     function startVoiceRecognition(interval) {
         var recognition = new webkitSpeechRecognition();
@@ -42,7 +44,13 @@
                 if (interim_transcript.toUpperCase().indexOf(command) >=0
                     || final_transcript.toUpperCase().indexOf(command) >=0) {
                     console.log('COMMAND:' + command);
-                    window.dispatchEvent(new CustomEvent(command));
+                    if (!voiceCommandInProgress) {
+                        voiceCommandInProgress = true;
+                        setTimeout(function () {
+                            voiceCommandInProgress = false;
+                        }, 2000);
+                        window.dispatchEvent(new CustomEvent(command));
+                    }
                 }
             });
 
