@@ -144,23 +144,18 @@ var httpsOptions = {
 var express = require('express');
 var app = express();
 
-//app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname));
 app.set('view engine', 'ejs');
+
+
 app.get('/', function(request, response) {
     response.sendFile(__dirname + '/index.html');
 });
-// Our HTTPS server does nothing but service WebSocket
-// connections, so every request just returns 404. Real Web
-// requests are handled by the main server on the box. If you
-// want to, you can return real HTML here and serve Web content.
 
-
-//var server = https.createServer(app);
-
-app.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
 });
 
 // var wsServer = new WebSocketServer({
