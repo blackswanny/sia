@@ -260,6 +260,7 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         //initializeVoiceRecognition();
 
+        
         startDeviceMotion();
     });
 
