@@ -38,6 +38,37 @@
 			    background: -o-linear-gradient(#fff, #999);
 			}
 
+			.modalArrows {
+			    position: fixed;
+			    font-family: Arial, Helvetica, sans-serif;
+			    right: 0;
+			    bottom: 0;
+			    z-index: 99999;
+			    opacity:1;
+			    -webkit-transition: opacity 400ms ease-in;
+			    -moz-transition: opacity 400ms ease-in;
+			    transition: opacity 400ms ease-in;
+			    display: block;
+			}
+
+			.modalArrows > div {
+				text-align: right;
+			    position: relative;
+			    margin: 10% auto;
+			    padding: 5px 20px 13px 20px;
+			    border-radius: 10px;
+			    background: #fff;
+			    background: -moz-linear-gradient(#fff, #999);
+			    background: -webkit-linear-gradient(#fff, #999);
+			    background: -o-linear-gradient(#fff, #999);
+			}
+
+			.modalArrows > div > div {
+			    display: inline-block;
+			    cursor: pointer;
+			    padding-right: 8px;
+			}
+
 			#info {
 				position: absolute;
 				top: 0px; width: 100%;
@@ -68,8 +99,20 @@
 		</style>
 	</head>
 	<body>
-    <div id="left" class="modalDialog"><div id="left1"><h2>Description</h2><p>The text is displayed here</p></div></div>
-    <div id="right" class="modalDialog"><div id="right1"><h2>Description</h2></div></div>
+	    <div class="modalArrows">
+	    	<div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.LEFT));">&larr;</div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.RIGHT));">&rarr;</div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.UP));">&uarr;</div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.DOWN));">&darr;</div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.FORWARD));">&#8599;</div>
+	    		<div onclick="window.dispatchEvent(new CustomEvent(SIA_COMMANDS.BACK));">&#8601;</div>
+	        </div>
+	    </div>
+
+	    <div id="left" class="modalDialog"><div id="left1"></div></div>
+	    <div id="right" class="modalDialog"><div id="right1"></div></div>
+
 		<div id="container"></div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
@@ -157,12 +200,12 @@
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
-				window.addEventListener( 'FORWARD', onForward, false);
-				window.addEventListener( 'BACK', onBack, false);
-				window.addEventListener( 'LEFT', onLeft, false);
-				window.addEventListener( 'RIGHT', onRight, false);
-				window.addEventListener( 'UP', onUp, false);
-				window.addEventListener( 'DOWN', onDown, false);
+				window.addEventListener( SIA_COMMANDS.FORWARD, onForward, false);
+				window.addEventListener( SIA_COMMANDS.BACK, onBack, false);
+				window.addEventListener( SIA_COMMANDS.LEFT, onLeft, false);
+				window.addEventListener( SIA_COMMANDS.RIGHT, onRight, false);
+				window.addEventListener( SIA_COMMANDS.UP, onUp, false);
+				window.addEventListener( SIA_COMMANDS.DOWN, onDown, false);
 
 
   			function onUp() {
