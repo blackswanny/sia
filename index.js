@@ -141,18 +141,26 @@ var httpsOptions = {
     //key: fs.readFileSync("/etc/pki/tls/private/mdn.key"),
     //cert: fs.readFileSync("/etc/pki/tls/certs/mdn.crt")
 };
-//var privateKey = fs.readFileSync('server.key').toString();
-//var certificate = fs.readFileSync('server.crt').toString();
+var express = require('express');
+var app = express();
 
-//var credentials = {key: privateKey, cert: certificate};
+//app.set('port', (process.env.PORT || 5000));
 
-var server = https.createServer({},function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello World\n');
+app.use(express.static(__dirname));
+app.set('view engine', 'ejs');
+app.get('/', function(request, response) {
+    response.sendFile(__dirname + '/index.html');
 });
+// Our HTTPS server does nothing but service WebSocket
+// connections, so every request just returns 404. Real Web
+// requests are handled by the main server on the box. If you
+// want to, you can return real HTML here and serve Web content.
 
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8000');
+
+var server = https.createServer(app);
+
+app.listen(8080, function() {
+    console.log((new Date()) + ' Server is listening on port 8080');
 });
 
 var wsServer = new WebSocketServer({
