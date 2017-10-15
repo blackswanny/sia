@@ -1,11 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - controls - deviceorientation</title>
+		<title>Cabin Seat</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="user-scalable=no, initial-scale=1">
 		<script src="js/ComandsAndControls.js"></script>
-		<script src="js/Info.js"></script>
 		<style>
 			body {
 				margin: 0px;
@@ -27,16 +26,37 @@
 			a {
 				color: #ff8800;
 			}
+
+			#left {
+			  padding: 10px;
+			  font-family: Arial;
+			  color: yellow;
+      	position: absolute;
+				top: 30px;
+				width: 100%;
+				text-align: left;
+				z-index: 100;
+				display:block;
+			}
+
+			#right {
+			  padding: 10px;
+			  font-family: Arial;
+			  color: yellow;
+      	position: absolute;
+				top: 30px;
+				left: 50%;
+				width: 100%;
+				text-align: left;
+				z-index: 100;
+				display:block;
+			}
 		</style>
 	</head>
 	<body>
-
+    <div id="left">Description</div>
+    <div id="right">Description</div>
 		<div id="container"></div>
-
-		<div id="info">
-			<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - equirectangular panorama demo with DeviceOrientation controls.
-			photo by <a href="http://www.flickr.com/photos/jonragnarsson/2294472375/" target="_blank" rel="noopener">Jón Ragnarsson</a>.
-		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
 
