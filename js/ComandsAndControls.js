@@ -27,7 +27,7 @@
         recognition.lang = 'en-US';
         recognition.maxAlternatives = 5;
         recognition.continuous = true;
-        recognition.interimResults = false;
+        recognition.interimResults = true;
 
         recognition.onstart = function() {
 
@@ -259,6 +259,7 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
         initializeVoiceRecognition();
+
 
         startDeviceMotion();
     });
