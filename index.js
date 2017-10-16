@@ -7,8 +7,8 @@ const WebSocketServer = WebSocket.Server;
 
 // Yes, SSL is required
 const serverConfig = {
-   // key: fs.readFileSync('server.key'),
-   // cert: fs.readFileSync('server.crt'),
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.crt'),
 };
 
 var express = require('express');
@@ -29,7 +29,7 @@ app.listen(app.get('port'), function() {
 });
 
 
-var httpsServer = https.createServer(app);
+var httpsServer = https.createServer(serverConfig, app);
 
 // Create a server for handling websocket calls
 var wss = new WebSocketServer({server: httpsServer});
